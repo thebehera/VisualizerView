@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VisualizerView">
+        <attr name="frequency" format="float"/>
+        <attr name="amplitude" format="float"/>
+        <attr name="idleAmplitude" format="float"/>
+        <attr name="numberOfWaves" format="integer"/>
+        <attr name="phaseShift" format="float"/>
+        <attr name="density" format="float" type="dimen"/>
+        <attr name="primaryWaveWidth" format="float" type="dimen"/>
+        <attr name="secondaryWaveWidth" format="float" type="dimen"/>
+        <attr name="primaryWaveColor" format="color"/>
+        <attr name="secondaryWaveColor" format="color"/>
+        <attr name="level" format="float"/>
+    </declare-styleable>
+</resources>
