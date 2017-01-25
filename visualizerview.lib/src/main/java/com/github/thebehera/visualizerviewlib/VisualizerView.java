@@ -15,11 +15,14 @@ import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 
 public class VisualizerView extends View {
@@ -94,18 +97,17 @@ public class VisualizerView extends View {
             float primaryLineWidth = constantsDefined.getDimension(R.styleable.VisualizerView_primaryWaveWidth,
                     Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3.0f, displayMetrics)));
             primaryLinePaint.setStrokeWidth(primaryLineWidth);
-
             float secondaryLineWidth = constantsDefined.getDimension(R.styleable.VisualizerView_secondaryWaveWidth,
                     Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1.0f, displayMetrics)));
             secondaryLinePaint.setStrokeWidth(secondaryLineWidth);
-
             TypedValue typedValue = new TypedValue();
             context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
-            primaryLinePaint.setColor(constantsDefined.getColor(R.styleable.VisualizerView_primaryWaveColor, typedValue.data));
+            int primaryColor = constantsDefined.getColor(R.styleable.VisualizerView_primaryWaveColor, typedValue.data);
+            primaryLinePaint.setColor(primaryColor);
+            typedValue = new TypedValue();
             context.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
-            int secondaryWaveColor = typedValue.data;
-            secondaryLinePaint.setColor(secondaryWaveColor);
-
+            int secondaryColor = constantsDefined.getColor(R.styleable.VisualizerView_secondaryWaveColor, typedValue.data);
+            secondaryLinePaint.setColor(secondaryColor);
             level = constantsDefined.getFloat(R.styleable.VisualizerView_level, 0.5f);
         } finally {
             constantsDefined.recycle();
