@@ -53,6 +53,7 @@ public class VisualizerView extends View {
     private List<Path> pathsToDraw = new ArrayList<>();
     private List<Paint> paintsToDraw = new ArrayList<>();
     private Picture cachedPicture = new Picture();
+    public boolean invalidateAll = false;
 
 
 
@@ -168,12 +169,21 @@ public class VisualizerView extends View {
         cachedPicture = tempPicture;
 //        pathsToDraw.clear();
 //        pathsToDraw.addAll(paths);
-        Rect roundedOutBounds = new Rect();
-        boundingRect.roundOut(roundedOutBounds);
-        if (Looper.myLooper() == Looper.getMainLooper()) {
-            invalidate(roundedOutBounds);
-        } else  {
-            postInvalidate(roundedOutBounds.left, roundedOutBounds.top, roundedOutBounds.right, roundedOutBounds.bottom);
+        if (invalidateAll) {
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                invalidate();
+            } else  {
+                postInvalidate();
+            }
+        } else {
+
+            Rect roundedOutBounds = new Rect();
+            boundingRect.roundOut(roundedOutBounds);
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                invalidate(roundedOutBounds);
+            } else  {
+                postInvalidate(roundedOutBounds.left, roundedOutBounds.top, roundedOutBounds.right, roundedOutBounds.bottom);
+            }
         }
     }
 
