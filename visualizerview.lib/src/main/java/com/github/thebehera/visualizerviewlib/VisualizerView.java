@@ -133,6 +133,7 @@ public class VisualizerView extends View {
         RectF boundingRect = new RectF(0, 0, 0, 0);
         Picture tempPicture = new Picture();
         Canvas recordingCanvas = tempPicture.beginRecording(getWidth(), getHeight());
+        float strokeSizes = primaryLinePaint.getStrokeWidth() + secondaryLinePaint.getStrokeWidth();
         for (int lineNumber = numberOfWaves - 1; lineNumber >= 0; lineNumber--) {
             Path path = new Path();
             Paint paintForLine = lineNumber == 0 ? new Paint(primaryLinePaint) : new Paint(secondaryLinePaint);
@@ -157,7 +158,7 @@ public class VisualizerView extends View {
                 } else {
                     path.lineTo(x, y);
                 }
-                boundingRect.union(x, y);
+                boundingRect.union(x - strokeSizes * 2, y - strokeSizes * 2, x + strokeSizes * 2, y + strokeSizes * 2);
             }
             recordingCanvas.drawPath(path, paintForLine);
 //            paths.add(path);
